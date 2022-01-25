@@ -1,16 +1,14 @@
 <template>
-  <Addcart />
+  <div>
+    <p>Portfolio</p>
+  </div>
 </template>
 
 <script>
-import Addcart from "@/components/Addcart";
 export default {
   data: () => ({
 
-  }),
-  components: {
-    Addcart,
-  }
+  })
 }
 </script>
 

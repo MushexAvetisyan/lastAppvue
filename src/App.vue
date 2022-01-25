@@ -7,13 +7,10 @@
 
 <script>
 import Navbar from '@/components/Navbar.vue'
-import Home from "@/components/Home";
-import Aboutme from "@/components/Aboutme";
+
 export default {
   components: {
     Navbar,
-    Home,
-    Aboutme,
   }
 }
 </script>

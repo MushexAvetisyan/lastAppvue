@@ -5,7 +5,8 @@
     </a>
     <ul>
       <li><a href=""><router-link to="/">Home</router-link></a></li>
-      <li><a href=""><router-link to="/Aboutme">About</router-link></a></li>
+      <li><a href=""><router-link to="/Aboutme">About Me</router-link></a></li>
+      <li><a href=""><router-link to="/Portfolio">Portfolio</router-link></a></li>
     </ul>
   </nav>
 </template>
