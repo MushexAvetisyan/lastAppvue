@@ -1,39 +1,25 @@
 <template>
   <transition name="modal-fade">
-    <div class="modal-backdrop">
-      <div class="modal"
-           role="dialog"
-           aria-labelledby="modalTitle"
-           aria-describedby="modalDescription"
-      >
-        <header class="modal-header"
-                id="modalTitle"
-        >
+    <div class="modal-backdrop" @submit.prevent>
+      <div class="modal" role="dialog" aria-labelledby="modalTitle" aria-describedby="modalDescription">
+        <header class="modal-header" id="modalTitle">
           <slot name="header">
             <input type="file">
           </slot>
-          <button
-              type="button"
-              class="btn-close"
-              @click="close"
-              aria-label="Close modal"
-          >
+          <button type="button" class="btn-close" @click="close" aria-label="Close modal">
             x
           </button>
         </header>
-
         <section class="modal-body"
-                 id="modalDescription"
-        >
+                 id="modalDescription">
           <slot name="body">
-<!--            Title: <input type="text" class="input_title">-->
             <div class="form__group field">
-              <input type="text" class="form__field" autocomplete="off" placeholder="Name" name="name" required />
+              <input type="text" class="form__field" autocomplete="off" placeholder="Name" name="name" required v-model="cardData.cardName"/>
               <label class="form__label">Name</label>
             </div>
             <br>
             <div class="form__group field">
-            <input type="text" class="form__field" autocomplete="off" placeholder="Title" name="name" required />
+            <input type="text" class="form__field" autocomplete="off" placeholder="Title" name="title" required v-model="cardData.cardTitle" />
             <label class="form__label">Title</label>
           </div>
           </slot>
@@ -42,26 +28,17 @@
         <footer class="modal-footer">
           <slot name="footer">
             <div class="form__group field">
-              <input type="text" class="form__field" autocomplete="off" placeholder="Description" name="name" required />
+              <input type="text" class="form__field" autocomplete="off" placeholder="Description" name="name" required  v-model="cardData.cardDescription"/>
               <label class="form__label">Description</label>
+              <h5>Date</h5>
+              <input type="date" v-model="cardData.cardDate" required>
             </div>
           </slot>
           <div class="buttons_modal">
-            <button
-                type="button"
-                class="btn-green"
-                @click="close"
-                aria-label="Close modal"
-            >
+            <button type="button" class="btn-green" @click="close" aria-label="Close modal">
               Close Modal
             </button>
-            <button
-                type="button"
-                class="btn-green"
-                @click="create"
-            >
-              Create Cart
-            </button>
+            <CustomButton class="btn-green" :text="'Create'" @buttonClick="formSubmit" />
           </div>
         </footer>
       </div>
@@ -70,18 +47,36 @@
 </template>
 
 <script>
+import CustomButton from "../components/CustomButton";
 export default {
-  name: 'Modal',
+  components: {CustomButton},
   methods: {
     close() {
       this.$emit('close');
     },
-    create() {
-      alert("yes")
+    formSubmit() {
+      this.$emit('formSubmit')
+    },
+    handleImage(e){
+      this.$emit('handleImage', e)
+    },
+  },
+  props: {
+    data: {
+      type: Array,
+      required: false,
+    },
+    cardData: {
+      type: Object
+    },
+    editCard: {
+      type: Function
     }
   },
 };
 </script>
+
+
 
 <style scoped lang="scss">
 .modal-fade-enter,
@@ -99,7 +94,7 @@ export default {
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(200, 214, 229,0.6);
   display: flex;
   justify-content: center;
   align-items: center;
